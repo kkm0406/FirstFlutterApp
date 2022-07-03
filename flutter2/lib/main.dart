@@ -25,36 +25,44 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: SnackBarPage(),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(color: Colors.deepPurple),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () => Navigator.pop(context),
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () => Navigator.pop(context),
-            ),
-            ListTile(
-              title: Text('Item 3'),
-              onTap: () => Navigator.pop(context),
-            ),
-            ListTile(
-              title: Text('Item 4'),
-              onTap: () => Navigator.pop(context),
-            ),
-          ],
+        appBar: AppBar(
+          title: Text(title),
         ),
+        body: SnackBarPage(),
+        drawer: MyDrawer());
+  }
+}
+
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.deepPurple),
+            child: Text('Drawer Header'),
+          ),
+          ListTile(
+            title: Text('Item 1'),
+            onTap: () => Navigator.pop(context),
+          ),
+          ListTile(
+            title: Text('Item 2'),
+            onTap: () => Navigator.pop(context),
+          ),
+          ListTile(
+            title: Text('Item 3'),
+            onTap: () => Navigator.pop(context),
+          ),
+          ListTile(
+            title: Text('Item 4'),
+            onTap: () => Navigator.pop(context),
+          ),
+        ],
       ),
     );
   }
