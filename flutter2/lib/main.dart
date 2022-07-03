@@ -32,16 +32,16 @@ class MyHomePage extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: BoxDecoration(color: Colors.deepPurple),
               child: Text('Drawer Header'),
             ),
             ListTile(
               title: Text('Item 1'),
-              onTap: () {},
+              onTap: () => Navigator.pop(context),
             ),
             ListTile(
               title: Text('Item 2'),
-              onTap: () {},
+              onTap: () => Navigator.pop(context),
             ),
           ],
         ),
