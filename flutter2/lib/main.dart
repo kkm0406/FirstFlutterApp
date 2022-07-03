@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +28,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Center(child: Text('My Page!')),
+      body: SnackBarPage(),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -43,9 +45,39 @@ class MyHomePage extends StatelessWidget {
               title: Text('Item 2'),
               onTap: () => Navigator.pop(context),
             ),
+            ListTile(
+              title: Text('Item 3'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              title: Text('Item 4'),
+              onTap: () => Navigator.pop(context),
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+class SnackBarPage extends StatelessWidget {
+  const SnackBarPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: RaisedButton(
+      onPressed: () {
+        final snackBar = SnackBar(
+          content: Text('snackBar!!!'),
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {},
+          ),
+        );
+        Scaffold.of(context).showSnackBar(snackBar);
+      },
+      child: Text('SnackBar Button'),
+    ));
   }
 }
