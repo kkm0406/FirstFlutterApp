@@ -27,6 +27,25 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Center(child: Text('My Page!')),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
