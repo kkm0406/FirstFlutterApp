@@ -11,8 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const appTitle = 'Orientation Demo';
 
-    return const MaterialApp(
+    return MaterialApp(
       title: appTitle,
+      theme: ThemeData(fontFamily: 'Dokdo'),
       home: OrientationList(
         title: appTitle,
       ),
@@ -38,7 +39,7 @@ class OrientationList extends StatelessWidget {
             // Generate 100 widgets that display their index in the List.
             children: List.generate(100, (index) {
               return Center(
-                child: Text('Item $index', style: TextStyle(fontSize: 15)),
+                child: Text('Item $index', style: TextStyle(fontSize: 30)),
               );
             }),
           );
