@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: appTitle,
-      theme: ThemeData(fontFamily: 'Dokdo'),
+      theme: ThemeData(fontFamily: 'Schyler'),
       home: OrientationList(
         title: appTitle,
       ),
@@ -39,7 +39,8 @@ class OrientationList extends StatelessWidget {
             // Generate 100 widgets that display their index in the List.
             children: List.generate(100, (index) {
               return Center(
-                child: Text('Item $index', style: TextStyle(fontSize: 30)),
+                child: Text('아이템 $index',
+                    style: TextStyle(fontSize: 30, fontFamily: 'Dokdo')),
               );
             }),
           );
