@@ -13,11 +13,51 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: appTitle,
-      theme: ThemeData(fontFamily: 'Schyler'),
-      home: OrientationList(
-        title: appTitle,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.lightBlue[800],
+        fontFamily: 'Hind',
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 20.0, fontFamily: 'Dokdo'),
+        ),
       ),
+      home: MyPage(),
     );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Welcome to Flutter"),
+        ),
+        body: Center(
+            child: Container(
+          color: Theme.of(context).colorScheme.secondary,
+          child: Text(
+            "Hello World",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        )),
+        floatingActionButton: Theme(
+          // Create a unique theme with `ThemeData`
+          data: Theme.of(context).copyWith(
+              colorScheme: Theme.of(context)
+                  .colorScheme
+                  .copyWith(secondary: Colors.yellow)),
+          child: FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.add),
+          ),
+        ));
   }
 }
 
