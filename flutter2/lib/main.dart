@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,85 +5,45 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  final appTitle = 'Drawer Demo';
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    const appTitle = 'Orientation Demo';
+
+    return const MaterialApp(
       title: appTitle,
-      home: MyHomePage(title: appTitle),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: SnackBarPage(),
-        drawer: MyDrawer());
-  }
-}
-
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.deepPurple),
-            child: Text('Drawer Header'),
-          ),
-          ListTile(
-            title: Text('Item 1'),
-            onTap: () => Navigator.pop(context),
-          ),
-          ListTile(
-            title: Text('Item 2'),
-            onTap: () => Navigator.pop(context),
-          ),
-          ListTile(
-            title: Text('Item 3'),
-            onTap: () => Navigator.pop(context),
-          ),
-          ListTile(
-            title: Text('Item 4'),
-            onTap: () => Navigator.pop(context),
-          ),
-        ],
+      home: OrientationList(
+        title: appTitle,
       ),
     );
   }
 }
 
-class SnackBarPage extends StatelessWidget {
-  const SnackBarPage({Key? key}) : super(key: key);
+class OrientationList extends StatelessWidget {
+  final String title;
+
+  const OrientationList({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: RaisedButton(
-      onPressed: () {
-        final snackBar = SnackBar(
-          content: Text('snackBar!!!'),
-          action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {},
-          ),
-        );
-        Scaffold.of(context).showSnackBar(snackBar);
-      },
-      child: Text('SnackBar Button'),
-    ));
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          return GridView.count(
+            // Create a grid with 2 columns in portrait mode, or 3 columns in
+            // landscape mode.
+            crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+            // Generate 100 widgets that display their index in the List.
+            children: List.generate(100, (index) {
+              return Center(
+                child: Text('Item $index', style: TextStyle(fontSize: 15)),
+              );
+            }),
+          );
+        },
+      ),
+    );
   }
 }
