@@ -15,52 +15,41 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text(appTitle),
         ),
-        body: const MyCustomForm(),
+        body: const MyPage(),
       ),
     );
   }
 }
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
-
-  @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
-}
-
-class _MyCustomFormState extends State<MyCustomForm> {
-  final _formKey = GlobalKey<FormState>(); //플러터가 만드는 formstate
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Plz enter some txt';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  //앱 로직 구현
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')));
-                }
-              },
-              child: const Text('Submit'),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: '이름',
+              icon: Icon(Icons.pedal_bike),
             ),
-          )
-        ],
-      ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            decoration: InputDecoration(labelText: '나이'),
+            onChanged: (text) => print('First text field: $text'),
+          ),
+        ),
+        TextFormField(
+          decoration: InputDecoration(
+              labelText: 'Enter your name',
+              labelStyle: TextStyle(color: Colors.purple)),
+        )
+      ],
     );
   }
 }
