@@ -1,49 +1,66 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Tabs Demo';
+    const appTitle = 'Form Validation Demo';
 
     return MaterialApp(
-      home: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: AppBar(
-              bottom: const TabBar(tabs: [
-                Tab(icon: Icon(Icons.abc_outlined)),
-                Tab(icon: Icon(Icons.accessibility_new_outlined)),
-                Tab(icon: Icon(Icons.add_comment_rounded))
-              ]),
-              title: const Text(appTitle),
-            ),
-            body: const TabBarView(children: [
-              FirstPage(),
-              Icon(Icons.accessibility_new_outlined),
-              Icon(Icons.add_comment_rounded),
-            ]),
-          )),
+      title: appTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(appTitle),
+        ),
+        body: const MyCustomForm(),
+      ),
     );
   }
 }
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({
-    Key? key,
-  }) : super(key: key);
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({Key? key}) : super(key: key);
+
+  @override
+  State<MyCustomForm> createState() => _MyCustomFormState();
+}
+
+class _MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>(); //플러터가 만드는 formstate
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Text(
-      'First Page',
-      style: TextStyle(fontFamily: 'Dokdo'),
-    ));
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Plz enter some txt';
+              }
+              return null;
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  //앱 로직 구현
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')));
+                }
+              },
+              child: const Text('Submit'),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
